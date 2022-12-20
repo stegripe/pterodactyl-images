@@ -1,3 +1,3 @@
-# template
+# pterodactyl-images
 
-A template to generate well-configured project base for Clytage.
+Generic Docker containers designed to work with Pterodactyl Panel and its daemon.
