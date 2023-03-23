@@ -1,0 +1,9 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["github>Clytage/renovate-config"],
+	"baseBranches": ["main"],
+	"docker": {
+		"enabled": true,
+		"rangeStrategy": "bump"
+	}
+}
