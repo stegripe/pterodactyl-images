@@ -1,0 +1,25 @@
+name: Build & Push MariaDB to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "mariadb/**/Dockerfile"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "mariadb/**/Dockerfile"
+
+jobs:
+  mariadb-10:
+    name: MariaDB 10
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: mariadb
+      workdir: mariadb/10
+      image-name: mariadb
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,96 @@
+name: Build & Push OCI Image to Registry
+
+on:
+  workflow_call:
+    inputs:
+      rootdir:
+        required: true
+        type: string
+      workdir:
+        required: true
+        type: string
+      image-name:
+        required: true
+        type: string
+    secrets:
+      github-username:
+        required: true
+      github-token:
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    continue-on-error: true
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
+
+      - name: Set up QEMU for Docker Buildx
+        uses: docker/setup-qemu-action@e81a89b1732b9c48d79cd809d8d81d79c4647a18 # tag=v2.1.0
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@4b4e9c3e2d4531116a6f8ba8e71fc6e2cb6e6c8c # v2.5.0
+
+      - name: Set up Node.js for extracting recipe from Dockerfile
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
+        with:
+          node-version: 18
+          check-latest: true
+
+      - name: Install meow dependencies for extracting recipe from Dockerfile
+        run: npm i --no-save meow
+
+      - name: Set WORKDIR and ROOTDIR
+        run: |
+          echo "WORKDIR=${{ inputs.workdir }}" >> $GITHUB_ENV
+          echo "ROOTDIR=${{ inputs.rootdir }}" >> $GITHUB_ENV
+
+      - name: Extract recipe from Dockerfile
+        id: recipe
+        run: |
+          TAGS=`node ${{ github.workspace }}/extractImage.mjs $WORKDIR/Dockerfile tags`
+          PLATFORMS=`node ${{ github.workspace }}/extractImage.mjs $WORKDIR/Dockerfile platforms`
+          VARIANT=`node ${{ github.workspace }}/extractImage.mjs $WORKDIR/Dockerfile variant`
+          echo TAGS: $TAGS
+          echo PLATFORMS: $PLATFORMS
+          echo VARIANT: $VARIANT
+          echo "::set-output name=tags::${TAGS//$', '/'%0A'}"
+          echo "::set-output name=platforms::${PLATFORMS//$', '/'%0A'}"
+          echo "::set-output name=variant::$VARIANT"
+
+      - name: Generate Docker image metadata
+        uses: docker/metadata-action@507c2f2dc502c992ad446e3d7a5dfbe311567a96 # v4.3.0
+        id: meta
+        with:
+          images: |
+            ghcr.io/Clytage/${{ inputs.image-name }}
+          tags: |
+            ${{ steps.recipe.outputs.tags }}
+
+      - name: Login to GitHub Container Registry
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # tag=v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.github-username }}
+          password: ${{ secrets.github-token }}
+
+      - name: Build and push the Docker image from the specified Dockerfile
+        id: docker_build
+        uses: docker/build-push-action@1104d471370f9806843c095c1db02b5a90c5f8b6 # v3.3.1
+        with:
+          context: ${{ env.ROOTDIR }}
+          file: ${{ env.WORKDIR }}/Dockerfile
+          platforms: |
+            ${{ steps.recipe.outputs.platforms }}
+          push: ${{ github.event_name == 'push' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

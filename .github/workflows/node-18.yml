@@ -1,0 +1,36 @@
+name: Build & Push Node.js 18 to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "node/18/**/Dockerfile"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "node/18/**/Dockerfile"
+
+jobs:
+  alpine:
+    name: Node.js 18 Alpine
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: node
+      workdir: node/18/alpine
+      image-name: node
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  debian:
+    name: Node.js 18 Debian
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: node
+      workdir: node/18/debian
+      image-name: node
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}

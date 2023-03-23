@@ -1,0 +1,47 @@
+name: Build & Push MongoDB to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "mongo/**/Dockerfile"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "mongo/**/Dockerfile"
+
+jobs:
+  mongo-4:
+    name: MongoDB 4
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: mongo
+      workdir: mongo/4
+      image-name: mongo
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  mongo-5:
+    name: MongoDB 5
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: mongo
+      workdir: mongo/5
+      image-name: mongo
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  mongo-6:
+    name: MongoDB 6
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: mongo
+      workdir: mongo/6
+      image-name: mongo
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
