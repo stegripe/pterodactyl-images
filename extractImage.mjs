@@ -56,9 +56,9 @@ const applyVariant = (string, variant) => `${string}-${variant}`;
 if (path) {
 	const lines = readFileSync(resolve(path)).toString().split(EOL);
 
-	const originalTags = getValue(lines.at(0)).split(", ");
+	const originalTags = getValue(lines.at(0))?.split(", ") ?? [];
 	const variant = getValue(lines.at(1));
-	const platforms = getValue(lines.at(2)).split(", ");
+	const platforms = getValue(lines.at(2))?.split(", ") ?? [];
 	const version = getValue(lines.at(3)).split("-").at(0);
 
 	const semverArray = version.split(".");
