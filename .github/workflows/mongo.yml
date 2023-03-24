@@ -15,34 +15,21 @@ on:
       - "mongo/entrypoint.sh"
 
 jobs:
-  mongo-4:
-    name: MongoDB 4
-    uses: ./.github/workflows/build.yml
-    with:
-      rootdir: mongo
-      workdir: mongo/4
-      image-name: mongo
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+  push-mongo:
+    name: MongoDB ${{ matrix.version }}
 
-  mongo-5:
-    name: MongoDB 5
-    uses: ./.github/workflows/build.yml
-    with:
-      rootdir: mongo
-      workdir: mongo/5
-      image-name: mongo
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 4
+          - 5
+          - 6
 
-  mongo-6:
-    name: MongoDB 6
     uses: ./.github/workflows/build.yml
     with:
       rootdir: mongo
-      workdir: mongo/6
+      workdir: mongo/${{ matrix.version }}
       image-name: mongo
     secrets:
       github-username: ${{ github.repository_owner }}

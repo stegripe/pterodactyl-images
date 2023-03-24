@@ -15,45 +15,39 @@ on:
       - "node/entrypoint.sh"
 
 jobs:
-  node-16-alpine:
-    name: Node.js 16 Alpine
+  node-alpine:
+    name: Node.js ${{ matrix.version }} Alpine
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 16
+          - 18
+
     uses: ./.github/workflows/build.yml
     with:
       rootdir: node
-      workdir: node/16/alpine
+      workdir: node/${{ matrix.version }}/alpine
       image-name: node
     secrets:
       github-username: ${{ github.repository_owner }}
       github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  node-18-alpine:
-    name: Node.js 18 Alpine
-    uses: ./.github/workflows/build.yml
-    with:
-      rootdir: node
-      workdir: node/18/alpine
-      image-name: node
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+  node-debian:
+    name: Node.js ${{ matrix.version }} Debian
 
-  node-16:
-    name: Node.js 16 Debian
-    uses: ./.github/workflows/build.yml
-    with:
-      rootdir: node
-      workdir: node/16/debian
-      image-name: node
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 16
+          - 18
 
-  node-18:
-    name: Node.js 18 Debian
     uses: ./.github/workflows/build.yml
     with:
       rootdir: node
-      workdir: node/18/debian
+      workdir: node/${{ matrix.version }}/debian
       image-name: node
     secrets:
       github-username: ${{ github.repository_owner }}
