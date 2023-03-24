@@ -6,11 +6,13 @@ on:
       - main
     paths:
       - "mongo/**/Dockerfile"
+      - "mongo/entrypoint.sh"
   pull_request:
     branches:
       - main
     paths:
       - "mongo/**/Dockerfile"
+      - "mongo/entrypoint.sh"
 
 jobs:
   mongo-4:

@@ -6,11 +6,13 @@ on:
       - main
     paths:
       - "node/**/**/Dockerfile"
+      - "node/entrypoint.sh"
   pull_request:
     branches:
       - main
     paths:
       - "node/**/**/Dockerfile"
+      - "node/entrypoint.sh"
 
 jobs:
   node-16-alpine:

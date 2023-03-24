@@ -6,11 +6,13 @@ on:
       - main
     paths:
       - "mariadb/**/Dockerfile"
+      - "mariadb/entrypoint.sh"
   pull_request:
     branches:
       - main
     paths:
       - "mariadb/**/Dockerfile"
+      - "mariadb/entrypoint.sh"
 
 jobs:
   mariadb-10:
