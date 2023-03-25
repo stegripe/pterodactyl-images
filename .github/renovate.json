@@ -3,6 +3,13 @@
 	"extends": ["github>Clytage/renovate-config"],
 	"baseBranches": ["main"],
 	"docker": {
+		"packageRules": [
+			{
+				"matchUpdateTypes": ["minor", "patch"],
+				"matchCurrentVersion": "!/^0/",
+				"automerge": true
+			}
+		],
 		"enabled": true,
 		"rangeStrategy": "bump"
 	}
