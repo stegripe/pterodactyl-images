@@ -1,7 +1,7 @@
 # TAGS:
 # VARIANT:
 # PLATFORMS: linux/amd64, linux/arm64/v8
-FROM --platform=$BUILDPLATFORM mongo:4.4.19
+FROM --platform=$BUILDPLATFORM mongo:6.0.5
 
 ENV DEBIAN_FRONTEND noninteractive
 
