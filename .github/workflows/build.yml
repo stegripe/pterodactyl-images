@@ -46,7 +46,7 @@ jobs:
           check-latest: true
 
       - name: Install meow dependencies for extracting recipe from Dockerfile
-        run: npm i --no-save meow
+        run: npm i --no-save meow@11.x
 
       - name: Set WORKDIR and ROOTDIR
         run: |
