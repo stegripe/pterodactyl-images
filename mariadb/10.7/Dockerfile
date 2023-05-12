@@ -1,7 +1,7 @@
 # TAGS:
 # VARIANT:
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/ppc64le, linux/s390x
-FROM --platform=$BUILDPLATFORM mariadb:10.7.8
+FROM --platform=$BUILDPLATFORM mariadb:10.11.3
 
 ENV DEBIAN_FRONTEND noninteractive
 
