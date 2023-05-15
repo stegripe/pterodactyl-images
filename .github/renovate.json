@@ -4,6 +4,20 @@
 	"baseBranches": ["main"],
 	"docker": {
 		"enabled": true,
+		"packageRules": [
+			{
+				"matchPackageNames": ["mariadb"],
+				"matchUpdateTypes": ["patch"]
+			},
+			{
+				"matchPackageNames": ["mongo"],
+				"matchUpdateTypes": ["patch"]
+			},
+			{
+				"matchPackageNames": ["node"],
+				"matchUpdateTypes": ["minor", "patch"]
+			}
+		],
 		"rangeStrategy": "bump"
 	}
 }
