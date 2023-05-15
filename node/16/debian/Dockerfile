@@ -12,7 +12,7 @@ RUN apt-get update \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
     && npm i npm@latest -g \
-    && adduser -D -h /home/container container
+    && groupadd -r container && useradd -d /home/container -r -g container container
 
 USER container
 ENV USER=container HOME=/home/container
