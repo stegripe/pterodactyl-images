@@ -52,3 +52,22 @@ jobs:
     secrets:
       github-username: ${{ github.repository_owner }}
       github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  node-puppeteer:
+    name: Node.js ${{ matrix.version }} Puppeteer
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 16
+          - 18
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: node
+      workdir: node/${{ matrix.version }}/puppeteer
+      image-name: node-puppeteer
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
