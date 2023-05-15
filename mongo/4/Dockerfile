@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update -y \
     && apt install -y netcat iproute2 \
-    && useradd -d /home/container -m container -s /bin/bash
+    && groupadd -r container && useradd -d /home/container -r -g container container
 
 USER container
 ENV USER=container HOME=/home/container
