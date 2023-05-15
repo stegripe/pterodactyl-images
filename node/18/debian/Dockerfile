@@ -6,7 +6,7 @@ FROM node:18.15.0-bullseye-slim
 ARG BUILDPLATFORM
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends iputils-ping procps tini tzdata curl ffmpeg git openssl sqlite3 tar build-essential python3 python-is-python3 iproute2 \
+    && apt-get install -y --no-install-recommends iputils-ping procps tini tzdata curl ffmpeg git openssl sqlite3 libsqlite3-dev tar build-essential python3 python3-dev dnsutils iproute2 libtool ca-certificates \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
