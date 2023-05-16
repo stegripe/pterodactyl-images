@@ -8,7 +8,7 @@ ARG BUILDPLATFORM
 RUN apk add --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base python3 \
     && ln -s /usr/bin/python3 /usr/local/bin/python \
     && npm i npm@latest -g \
-    && useradd -d /home/container -r container
+    && adduser -D /home/container container
 
 USER container
 ENV USER=container HOME=/home/container
