@@ -6,16 +6,14 @@
 		"enabled": true,
 		"packageRules": [
 			{
+				"enabled": false,
+				"matchDatasources": ["docker"],
+				"matchUpdateTypes": ["major"]
+			}, {
+				"enabled": false,
+				"matchDatasources": ["docker"],
 				"matchPackageNames": ["mariadb"],
-				"matchUpdateTypes": ["patch"]
-			},
-			{
-				"matchPackageNames": ["mongo"],
-				"matchUpdateTypes": ["patch"]
-			},
-			{
-				"matchPackageNames": ["node"],
-				"matchUpdateTypes": ["minor", "patch"]
+				"matchUpdateTypes": ["major", "minor"]
 			}
 		],
 		"rangeStrategy": "bump"
