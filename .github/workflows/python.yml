@@ -1,0 +1,60 @@
+name: Build & Push Python to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "python/**/**/Dockerfile"
+      - "python/entrypoint.sh"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "python/**/**/Dockerfile"
+      - "python/entrypoint.sh"
+
+jobs:
+  python-alpine:
+    name: Python ${{ matrix.version }} Alpine
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 3.7
+          - 3.8
+          - 3.9
+          - "3.10"
+          - 3.11
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: python
+      workdir: python/${{ matrix.version }}/alpine
+      image-name: python
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  python-debian:
+    name: Python ${{ matrix.version }} Debian
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - 3.7
+          - 3.8
+          - 3.9
+          - "3.10"
+          - 3.11
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: python
+      workdir: python/${{ matrix.version }}/debian
+      image-name: python
+    secrets:
+      github-username: ${{ github.repository_owner }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
