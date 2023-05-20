@@ -12,7 +12,7 @@
 			}, {
 				"enabled": false,
 				"matchDatasources": ["docker"],
-				"matchPackageNames": ["mariadb"],
+				"matchPackageNames": ["mariadb", "python"],
 				"matchUpdateTypes": ["major", "minor"]
 			}
 		],
