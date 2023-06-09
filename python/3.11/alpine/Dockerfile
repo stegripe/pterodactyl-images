@@ -1,7 +1,7 @@
 # TAGS: latest
 # VARIANT: alpine
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
-FROM --platform=$BUILDPLATFORM python:3.11.3-alpine
+FROM --platform=$BUILDPLATFORM python:3.11.4-alpine
 
 RUN apk add --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base \
     && addgroup -S container && adduser -D -h /home/container -S -G container container
