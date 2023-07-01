@@ -1,7 +1,7 @@
 # TAGS: gallium
 # VARIANT:
 # PLATFORMS: linux/amd64
-FROM node:16.20.0-bullseye-slim
+FROM node:16.20.1-bullseye-slim
 
 ARG BUILDPLATFORM
 
