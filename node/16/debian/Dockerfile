@@ -12,6 +12,7 @@ RUN apt-get update \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
     && npm i npm@latest -g \
+    && corepack enable && corepack prepare yarn@stable pnpm@latest \
     && groupadd -r container && useradd -d /home/container -r -g container container
 
 USER container
