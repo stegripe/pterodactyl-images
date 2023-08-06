@@ -18,8 +18,7 @@ const cli = meow(
       --reverse-tags, -r     Reverse the tags array. Type: boolean. Default: false
 
       --help                 Print help menu
-`,
-	{
+`, {
 		importMeta: import.meta,
 		flags: {
 			applyVariant: {
@@ -66,7 +65,12 @@ if (path) {
 
 	const tags = [...versions, ...originalTags].map(t => (variantApply && variant ? applyVariant(t, variant) : t));
 
-	const recipe = { tags: reverseTags ? tags.reverse() : tags, variant, platforms, version };
+	const recipe = {
+		tags: reverseTags ? tags.reverse() : tags,
+		variant,
+		platforms,
+		version
+	};
 
 	if (key) {
 		let value = recipe[key];
