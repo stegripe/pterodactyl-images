@@ -1,7 +1,7 @@
 # TAGS: latest
 # VARIANT:
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
-FROM --platform=$BUILDPLATFORM python:3.11.4-slim-bullseye
+FROM --platform=$BUILDPLATFORM python:3.11.5-slim-bullseye
 
 RUN apt update \
     && apt install -y git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata \
