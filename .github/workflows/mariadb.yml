@@ -31,6 +31,8 @@ jobs:
           - 10.9
           - "10.10"
           - 10.11
+          - "11.0"
+          - 11.1
 
     uses: ./.github/workflows/build.yml
     with:
