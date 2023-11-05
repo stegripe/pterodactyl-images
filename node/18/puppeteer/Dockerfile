@@ -1,4 +1,4 @@
-# TAGS: hydrogen, lts
+# TAGS: hydrogen
 # VARIANT:
 # PLATFORMS: linux/amd64
 FROM node:18.18.2-bullseye-slim
