@@ -33,9 +33,7 @@ jobs:
       rootdir: python
       workdir: python/${{ matrix.version }}/alpine
       image-name: python
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit
 
   python-debian:
     name: Python ${{ matrix.version }} Debian
@@ -55,6 +53,4 @@ jobs:
       rootdir: python
       workdir: python/${{ matrix.version }}/debian
       image-name: python
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit

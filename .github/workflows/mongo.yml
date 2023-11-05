@@ -31,6 +31,4 @@ jobs:
       rootdir: mongo
       workdir: mongo/${{ matrix.version }}
       image-name: mongo
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit

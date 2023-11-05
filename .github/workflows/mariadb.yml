@@ -39,6 +39,4 @@ jobs:
       rootdir: mariadb
       workdir: mariadb/${{ matrix.version }}
       image-name: mariadb
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit

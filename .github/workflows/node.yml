@@ -30,9 +30,7 @@ jobs:
       rootdir: node
       workdir: node/${{ matrix.version }}/alpine
       image-name: node
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit
 
   node-debian:
     name: Node.js ${{ matrix.version }} Debian
@@ -49,9 +47,7 @@ jobs:
       rootdir: node
       workdir: node/${{ matrix.version }}/debian
       image-name: node
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit
 
   node-puppeteer:
     name: Node.js ${{ matrix.version }} Puppeteer
@@ -68,6 +64,4 @@ jobs:
       rootdir: node
       workdir: node/${{ matrix.version }}/puppeteer
       image-name: node-puppeteer
-    secrets:
-      github-username: ${{ github.repository_owner }}
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit
