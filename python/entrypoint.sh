@@ -1,5 +1,4 @@
 #!/bin/bash
-# TODO: rebuild docker images
 
 # Default the TZ environment variable to UTC
 TZ=${TZ:-UTC}
