@@ -37,6 +37,7 @@ jobs:
 
   python-debian:
     name: Python ${{ matrix.version }} Debian
+    needs: python-alpine
 
     strategy:
       fail-fast: false

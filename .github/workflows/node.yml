@@ -34,6 +34,7 @@ jobs:
 
   node-debian:
     name: Node.js ${{ matrix.version }} Debian
+    needs: node-alpine
 
     strategy:
       fail-fast: false
@@ -51,6 +52,7 @@ jobs:
 
   node-puppeteer:
     name: Node.js ${{ matrix.version }} Puppeteer
+    needs: node-debian
 
     strategy:
       fail-fast: false
