@@ -7,7 +7,7 @@ ARG BUILDPLATFORM
 
 RUN apt update \
     && apt install -y git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata \
-    && addgroup -S container && adduser -D -h /home/container -S -G container container
+    && groupadd -r container && useradd -d /home/container -r -g container container
 
 USER container
 ENV USER=container HOME=/home/container

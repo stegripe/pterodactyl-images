@@ -1,13 +1,13 @@
 # TAGS:
 # VARIANT:
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
-FROM golang:1.15.15-bullseye
+FROM golang:1.15.15-buster
 
 ARG BUILDPLATFORM
 
 RUN apt update \
     && apt install -y git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata \
-    && addgroup -S container && adduser -D -h /home/container -S -G container container
+    && groupadd -r container && useradd -d /home/container -r -g container container
 
 USER container
 ENV USER=container HOME=/home/container
