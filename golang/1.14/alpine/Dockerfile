@@ -1,7 +1,7 @@
 # TAGS:
 # VARIANT: alpine
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
-FROM golang:1.14-alpine
+FROM golang:1.14.15-alpine
 
 ARG BUILDPLATFORM
 
