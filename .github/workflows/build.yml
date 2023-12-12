@@ -66,7 +66,7 @@ jobs:
         id: meta
         with:
           images: |
-            ghcr.io/Clytage/${{ inputs.image-name }}
+            ghcr.io/Stegripe/${{ inputs.image-name }}
           tags: |
             ${{ steps.recipe.outputs.tags }}
 
