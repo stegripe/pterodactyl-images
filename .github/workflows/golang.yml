@@ -1,0 +1,63 @@
+name: Build & Push Golang to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "golang/**/**/Dockerfile"
+      - "golang/entrypoint.sh"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "golang/**/**/Dockerfile"
+      - "golang/entrypoint.sh"
+
+jobs:
+  golang-alpine:
+    name: Golang ${{ matrix.version }} Alpine
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - "10.14"
+          - "10.15"
+          - "10.16"
+          - "10.17"
+          - "10.18"
+          - "10.19"
+          - "10.20"
+          - "10.21"
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: golang
+      workdir: golang/${{ matrix.version }}/alpine
+      image-name: golang
+    secrets: inherit
+
+  golang-debian:
+    name: Golang ${{ matrix.version }} Debian
+    needs: golang-alpine
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - "10.14"
+          - "10.15"
+          - "10.16"
+          - "10.17"
+          - "10.18"
+          - "10.19"
+          - "10.20"
+          - "10.21"
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: golang
+      workdir: golang/${{ matrix.version }}/debian
+      image-name: golang
+    secrets: inherit
