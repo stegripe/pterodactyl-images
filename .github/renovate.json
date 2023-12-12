@@ -10,7 +10,7 @@
 		}, {
 			"enabled": false,
 			"matchDatasources": ["docker"],
-			"matchPackageNames": ["mariadb", "python"],
+			"matchPackageNames": ["mariadb", "python", "golang"],
 			"matchUpdateTypes": ["major", "minor"]
 		}]
 	}
