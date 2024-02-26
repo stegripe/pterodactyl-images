@@ -5,7 +5,7 @@ FROM golang:1.19.13-alpine
 
 ARG BUILDPLATFORM
 
-RUN apk add --update --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base \
+RUN apk add --update --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base libdlib-dev libblas-dev libatlas-base-dev liblapack-dev libjpeg62-turbo-dev \
     && addgroup -S container && adduser -D -h /home/container -S -G container container
 
 USER container

@@ -6,7 +6,7 @@ FROM golang:1.21.5-bullseye
 ARG BUILDPLATFORM
 
 RUN apt update \
-    && apt install -y git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata \
+    && apt install -y git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata libdlib-dev libblas-dev libatlas-base-dev liblapack-dev libjpeg62-turbo-dev \
     && groupadd -r container && useradd -d /home/container -r -g container container
 
 USER container
