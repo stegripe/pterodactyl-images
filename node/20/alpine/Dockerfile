@@ -1,7 +1,7 @@
 # TAGS: iron, lts
 # VARIANT: alpine
 # PLATFORMS: linux/amd64
-FROM node:20.11.1-alpine
+FROM node:20.12.1-alpine
 
 ARG BUILDPLATFORM
 
