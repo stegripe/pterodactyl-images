@@ -40,8 +40,8 @@ jobs:
           node-version: 20
           check-latest: true
 
-      - name: Install meow dependencies for extracting recipe from Dockerfile
-        run: npm i --no-save meow@13.1.x
+      - name: Install common dependencies for extracting recipe from Dockerfile
+        run: npm i --no-save fs path os
 
       - name: Set WORKDIR and ROOTDIR
         run: |
