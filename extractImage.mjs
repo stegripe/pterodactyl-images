@@ -23,17 +23,17 @@ const cli = meow(
 		flags: {
 			applyVariant: {
 				type: "boolean",
-				alias: "a",
+				shortFlag: "a",
 				default: true,
 			},
 			seperator: {
 				type: "string",
-				alias: "s",
+				shortFlag: "s",
 				default: ", ",
 			},
 			reverseTags: {
 				type: "boolean",
-				alias: "r",
+				shortFlag: "r",
 				default: false,
 			},
 		},
