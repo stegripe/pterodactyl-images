@@ -1,7 +1,7 @@
 # TAGS: hydrogen
 # VARIANT: alpine
 # PLATFORMS: linux/amd64
-FROM node:18.19.1-alpine
+FROM node:18.20.1-alpine
 
 ARG BUILDPLATFORM
 
