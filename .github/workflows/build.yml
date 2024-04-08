@@ -37,11 +37,11 @@ jobs:
       - name: Set up Node.js for extracting recipe from Dockerfile
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
-          node-version: 18
+          node-version: 20
           check-latest: true
 
       - name: Install meow dependencies for extracting recipe from Dockerfile
-        run: npm i --no-save meow@11.x
+        run: npm i --no-save meow@13.1.x
 
       - name: Set WORKDIR and ROOTDIR
         run: |
