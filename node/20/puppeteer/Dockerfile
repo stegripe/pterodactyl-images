@@ -1,7 +1,7 @@
 # TAGS: iron, lts
 # VARIANT:
 # PLATFORMS: linux/amd64
-FROM node:20.12.1-bullseye-slim
+FROM node:20.12.2-bullseye-slim
 
 ARG BUILDPLATFORM
 
