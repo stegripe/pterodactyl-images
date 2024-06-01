@@ -19,7 +19,7 @@ const semverArray = version.split(".");
 const versions = semverArray.map((_, i) => semverArray.slice(0, semverArray.length - i).join("."));
 
 const recipe = {
-    tags: [...versions, ...originalTags].map(t => (applyVariant(t, variant))),
+    tags: [...versions, ...originalTags].map(t => variant !== undefined ? (applyVariant(t, variant)) : t),
     variant,
     platforms: getValue(lines.at(2))?.split(", ") ?? [],
     version
