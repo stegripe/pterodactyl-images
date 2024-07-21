@@ -1,4 +1,4 @@
-name: Build & Push Node.js to OCI Image Registry
+name: Build and Push Node.js to OCI Image Registry
 
 on:
   push:

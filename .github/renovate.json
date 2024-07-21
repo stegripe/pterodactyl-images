@@ -1,17 +1,17 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>stegripe/renovate-config"],
-	"docker": {
-		"enabled": true,
-		"packageRules": [{
-			"enabled": false,
-			"matchDatasources": ["docker"],
-			"matchUpdateTypes": ["major"]
-		}, {
-			"enabled": false,
-			"matchDatasources": ["docker"],
-			"matchPackageNames": ["mariadb", "python", "golang"],
-			"matchUpdateTypes": ["major", "minor"]
-		}]
-	}
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["github>stegripe/renovate-config"],
+    "docker": {
+        "enabled": true,
+        "packageRules": [{
+            "enabled": false,
+            "matchDatasources": ["docker"],
+            "matchUpdateTypes": ["major"]
+        }, {
+            "enabled": false,
+            "matchDatasources": ["docker"],
+            "matchPackageNames": ["mariadb", "python", "golang"],
+            "matchUpdateTypes": ["major", "minor"]
+        }]
+    }
 }

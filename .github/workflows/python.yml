@@ -1,4 +1,4 @@
-name: Build & Push Python to OCI Image Registry
+name: Build and Push Python to OCI Image Registry
 
 on:
   push:

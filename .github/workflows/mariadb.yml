@@ -1,4 +1,4 @@
-name: Build & Push MariaDB to OCI Image Registry
+name: Build and Push MariaDB to OCI Image Registry
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Build & Push Golang to OCI Image Registry
+name: Build and Push Golang to OCI Image Registry
 
 on:
   push:

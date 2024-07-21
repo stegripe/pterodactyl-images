@@ -1,4 +1,4 @@
-name: Build & Push OCI Image to Registry
+name: Build and Push OCI Image to Registry
 
 on:
   workflow_call:

@@ -1,4 +1,4 @@
-name: Build & Push MongoDB to OCI Image Registry
+name: Build and Push MongoDB to OCI Image Registry
 
 on:
   push:
