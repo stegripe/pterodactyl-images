@@ -1,7 +1,7 @@
 # TAGS: hydrogen
 # VARIANT:
 # PLATFORMS: linux/amd64
-FROM node:18.20.3-bullseye-slim
+FROM node:18.20.4-bullseye-slim
 
 ARG BUILDPLATFORM
 
