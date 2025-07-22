@@ -21,7 +21,7 @@ jobs:
   build:
     continue-on-error: true
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Repository
