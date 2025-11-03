@@ -37,7 +37,7 @@ jobs:
       - name: Set up Node.js for extracting recipe from Dockerfile
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: 22
+          node-version: 24
           check-latest: true
 
       - name: Install common dependencies for extracting recipe from Dockerfile
