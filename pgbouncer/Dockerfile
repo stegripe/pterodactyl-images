@@ -1,6 +1,6 @@
-# TAGS: latest, 1.25.1
+# TAGS: latest
 # VARIANT: alpine
-# PLATFORMS: linux/amd64, linux/arm64/v8
+# PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
 FROM --platform=$BUILDPLATFORM alpine:3.22
 ARG VERSION=1.25.1
 
