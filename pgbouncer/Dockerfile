@@ -1,4 +1,4 @@
-# TAGS:
+# TAGS: latest, 1.25.1
 # VARIANT: alpine
 # PLATFORMS: linux/amd64, linux/arm64/v8
 FROM --platform=$BUILDPLATFORM alpine:3.22 AS build
