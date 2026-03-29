@@ -1,0 +1,26 @@
+name: Build and Push PgBouncer to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "pgbouncer/Dockerfile"
+      - "pgbouncer/entrypoint.sh"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "pgbouncer/Dockerfile"
+      - "pgbouncer/entrypoint.sh"
+
+jobs:
+  push-pgbouncer:
+    name: PgBouncer
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: pgbouncer
+      workdir: pgbouncer
+      image-name: pgbouncer
+    secrets: inherit
