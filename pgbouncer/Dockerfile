@@ -1,7 +1,7 @@
 # TAGS: latest, 1.25.1
 # VARIANT: alpine
 # PLATFORMS: linux/amd64, linux/arm64/v8
-FROM --platform=$BUILDPLATFORM alpine:3.22 AS build
+FROM --platform=$BUILDPLATFORM alpine:3.22
 ARG VERSION=1.25.1
 
 RUN apk add --no-cache autoconf automake curl gcc libc-dev libevent-dev libtool make openssl-dev pkgconfig
@@ -11,14 +11,12 @@ RUN curl -sS -o /pgbouncer.tar.gz -L https://pgbouncer.github.io/downloads/files
 
     RUN cd /pgbouncer && ./configure --prefix=/usr && make -j$(nproc) pgbouncer && strip pgbouncer
 
-FROM --platform=$BUILDPLATFORM alpine:3.22
-
 RUN apk add --no-cache libevent postgresql-client iproute2 \
     && addgroup -S container && adduser -D -h /home/container -S -G container container
 
-COPY --from=build /pgbouncer/pgbouncer /usr/bin/pgbouncer
-COPY --from=build /pgbouncer/etc/pgbouncer.ini /home/container/pgbouncer.ini.example
-COPY --from=build /pgbouncer/etc/userlist.txt /home/container/userlist.txt.example
+RUN cp /pgbouncer/pgbouncer /usr/bin/pgbouncer && \
+    cp /pgbouncer/etc/pgbouncer.ini /home/container/pgbouncer.ini.example && \
+    cp /pgbouncer/etc/userlist.txt /home/container/userlist.txt.example
 
 USER container
 ENV USER=container HOME=/home/container
