@@ -1,7 +1,7 @@
-# TAGS: iron, lts
+# TAGS: krypton, lts
 # VARIANT: alpine
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/arm/v6, linux/ppc64le, linux/s390x
-FROM node:20.14.0-alpine
+FROM node:24.14.1-alpine
 
 ARG BUILDPLATFORM
 

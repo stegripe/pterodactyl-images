@@ -1,7 +1,7 @@
-# TAGS: iron, lts
+# TAGS: jod
 # VARIANT:
 # PLATFORMS: linux/amd64
-FROM node:20.14.0-bullseye-slim
+FROM node:22.22.2-bullseye-slim
 
 ARG BUILDPLATFORM
 

@@ -1,7 +1,7 @@
-# TAGS: hydrogen
+# TAGS: krypton, lts
 # VARIANT:
 # PLATFORMS: linux/amd64
-FROM node:18.20.3-bullseye-slim
+FROM node:24.14.1-bullseye-slim
 
 ARG BUILDPLATFORM
 
