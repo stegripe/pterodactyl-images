@@ -22,8 +22,8 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - 18
-          - 20
+          - 22
+          - 24
 
     uses: ./.github/workflows/build.yml
     with:
@@ -40,8 +40,8 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - 18
-          - 20
+          - 22
+          - 24
 
     uses: ./.github/workflows/build.yml
     with:
@@ -58,8 +58,8 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - 18
-          - 20
+          - 22
+          - 24
 
     uses: ./.github/workflows/build.yml
     with:
