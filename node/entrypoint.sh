@@ -1,4 +1,5 @@
 #!/bin/ash
+# BYPASSED FOR TRIGGER GITHUB ACTIONS PATHS
 
 # Default the TZ environment variable to UTC
 TZ=${TZ:-UTC}
