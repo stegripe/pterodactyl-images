@@ -1,7 +1,7 @@
 # TAGS: latest
 # VARIANT: alpine
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
-FROM --platform=$BUILDPLATFORM alpine:3.22
+FROM --platform=$BUILDPLATFORM alpine:3.23
 ARG VERSION=1.25.1
 
 RUN apk add --no-cache autoconf automake curl gcc libc-dev libevent-dev libtool make openssl-dev pkgconfig
