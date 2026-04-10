@@ -80,7 +80,7 @@ jobs:
 
       - name: Build and push the Docker image from the specified Dockerfile
         id: docker_build
-        uses: docker/build-push-action@a254f8ca60a858f3136a2f1f23a60969f2c402dd # v6.4.0
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: ${{ env.ROOTDIR }}
           file: ${{ env.WORKDIR }}/Dockerfile
