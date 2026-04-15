@@ -3,16 +3,17 @@ name: Build and Push Golang to OCI Image Registry
 on:
   push:
     branches:
-      - main
+      - "**"
     paths:
       - "golang/**/**/Dockerfile"
       - "golang/entrypoint.sh"
   pull_request:
     branches:
-      - main
+      - "**"
     paths:
       - "golang/**/**/Dockerfile"
       - "golang/entrypoint.sh"
+  workflow_dispatch:
 
 jobs:
   golang-alpine:

@@ -3,16 +3,17 @@ name: Build and Push Python to OCI Image Registry
 on:
   push:
     branches:
-      - main
+      - "**"
     paths:
       - "python/**/**/Dockerfile"
       - "python/entrypoint.sh"
   pull_request:
     branches:
-      - main
+      - "**"
     paths:
       - "python/**/**/Dockerfile"
       - "python/entrypoint.sh"
+  workflow_dispatch:
 
 jobs:
   python-alpine:
