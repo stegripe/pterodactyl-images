@@ -1,7 +1,7 @@
 # TAGS: krypton, lts
 # VARIANT:
 # PLATFORMS: linux/amd64
-FROM node:24.14.1-bullseye-slim
+FROM node:24.15.0-bullseye-slim
 
 ARG BUILDPLATFORM
 
