@@ -62,7 +62,7 @@ jobs:
           echo "variant=$VARIANT" >> "$GITHUB_OUTPUT"
 
       - name: Generate Docker image metadata
-        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
+        uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6.1.0
         id: meta
         with:
           images: |
