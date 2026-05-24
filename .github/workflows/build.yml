@@ -57,9 +57,15 @@ jobs:
           echo TAGS: $TAGS
           echo PLATFORMS: $PLATFORMS
           echo VARIANT: $VARIANT
-          echo "tags=${TAGS//$', '/'%0A'}" >> "$GITHUB_OUTPUT"
-          echo "platforms=${PLATFORMS//$', '/'%0A'}" >> "$GITHUB_OUTPUT"
-          echo "variant=$VARIANT" >> "$GITHUB_OUTPUT"
+          {
+            echo "tags<<EOF"
+            echo "$TAGS"
+            echo "EOF"
+            echo "platforms<<EOF"
+            echo "$PLATFORMS"
+            echo "EOF"
+            echo "variant=$VARIANT"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Generate Docker image metadata
         uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
