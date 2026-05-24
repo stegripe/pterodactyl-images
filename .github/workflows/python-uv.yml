@@ -1,0 +1,38 @@
+name: Build and Push Python uv to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "python/uv/**/Dockerfile"
+      - "python/uv/entrypoint.sh"
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - "python/uv/**/Dockerfile"
+      - "python/uv/entrypoint.sh"
+  workflow_dispatch:
+
+jobs:
+  python-uv-alpine:
+    name: Python uv Alpine
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: python
+      workdir: python/uv/alpine
+      image-name: python
+    secrets: inherit
+
+  python-uv-debian:
+    name: Python uv Debian
+    needs: python-uv-alpine
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: python
+      workdir: python/uv/debian
+      image-name: python
+    secrets: inherit

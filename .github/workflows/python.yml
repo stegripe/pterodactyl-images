@@ -5,13 +5,13 @@ on:
     branches:
       - "**"
     paths:
-      - "python/**/**/Dockerfile"
+      - "python/3.*/**/Dockerfile"
       - "python/entrypoint.sh"
   pull_request:
     branches:
       - "**"
     paths:
-      - "python/**/**/Dockerfile"
+      - "python/3.*/**/Dockerfile"
       - "python/entrypoint.sh"
   workflow_dispatch:
 

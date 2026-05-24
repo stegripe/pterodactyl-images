@@ -11,15 +11,18 @@ const getValue = string => /[^:]+$/u.exec(string)?.at(0).trim();
 const applyVariant = (string, variant) => `${string}-${variant}`;
 
 const lines = readFileSync(resolve(path)).toString().split(EOL);
-const originalTags = getValue(lines.at(0))?.split(", ") ?? [];
+const originalTags = getValue(lines.at(0))?.split(", ").filter(Boolean) ?? [];
 const variant = getValue(lines.at(1));
 
 const version = getValue(lines.at(3)).split("-").at(0);
 const semverArray = version.split(".");
-const versions = semverArray.map((_, i) => semverArray.slice(0, semverArray.length - i).join("."));
+const usesExplicitTags = originalTags.includes("uv");
+const versions = usesExplicitTags
+    ? originalTags
+    : [...semverArray.map((_, i) => semverArray.slice(0, semverArray.length - i).join(".")), ...originalTags];
 
 const recipe = {
-    tags: [...versions, ...originalTags].map(t => variant !== undefined ? (applyVariant(t, variant)) : t),
+    tags: versions.map(t => variant !== undefined ? (applyVariant(t, variant)) : t),
     variant,
     platforms: getValue(lines.at(2))?.split(", ") ?? [],
     version
