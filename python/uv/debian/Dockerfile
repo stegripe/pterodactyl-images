@@ -5,8 +5,10 @@ FROM --platform=$BUILDPLATFORM debian:trixie-slim
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
-RUN apt update \
-    && apt install -y git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata \
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata \
     && groupadd -r container && useradd -d /home/container -m -r -g container container \
     && rm -rf /var/lib/apt/lists/*
 
