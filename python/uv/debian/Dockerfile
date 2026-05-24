@@ -1,9 +1,9 @@
 # TAGS: uv
 # VARIANT:
-# PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
-FROM --platform=$BUILDPLATFORM debian:bookworm-slim
+# PLATFORMS: linux/amd64, linux/arm64/v8
+FROM --platform=$BUILDPLATFORM debian:trixie-slim
 
-COPY --from=ghcr.io/astral-sh/uv:0.8.15 /uv /uvx /usr/local/bin/
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 RUN apt update \
     && apt install -y git build-essential ca-certificates iputils-ping curl iproute2 ffmpeg procps tini tar tzdata \

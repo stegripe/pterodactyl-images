@@ -1,9 +1,9 @@
 # TAGS: uv
 # VARIANT: alpine
-# PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
+# PLATFORMS: linux/amd64, linux/arm64/v8
 FROM --platform=$BUILDPLATFORM alpine:3.22
 
-COPY --from=ghcr.io/astral-sh/uv:0.8.15 /uv /uvx /usr/local/bin/
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 RUN apk add --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base bash \
     && addgroup -S container && adduser -D -h /home/container -S -G container container
