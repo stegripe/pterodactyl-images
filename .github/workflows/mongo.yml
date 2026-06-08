@@ -3,7 +3,7 @@ name: Build and Push MongoDB to OCI Image Registry
 on:
   push:
     branches:
-      - "**"
+      - main
     paths:
       - "mongo/**/Dockerfile"
       - "mongo/entrypoint.sh"

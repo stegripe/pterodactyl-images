@@ -3,7 +3,7 @@ name: Build and Push Python uv to OCI Image Registry
 on:
   push:
     branches:
-      - "**"
+      - main
     paths:
       - "python/uv/**/Dockerfile"
       - "python/uv/entrypoint.sh"

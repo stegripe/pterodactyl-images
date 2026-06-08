@@ -3,7 +3,7 @@ name: Build and Push Node.js to OCI Image Registry
 on:
   push:
     branches:
-      - "**"
+      - main
     paths:
       - "node/**/**/Dockerfile"
       - "node/entrypoint.sh"

@@ -3,7 +3,7 @@ name: Build and Push MariaDB to OCI Image Registry
 on:
   push:
     branches:
-      - "**"
+      - main
     paths:
       - "mariadb/**/Dockerfile"
       - "mariadb/entrypoint.sh"
