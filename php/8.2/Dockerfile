@@ -16,12 +16,16 @@ RUN deluser www-data && \
     addgroup -g 988 container && \
     adduser -D -u 988 -h /home/container -S -G container container
 
-RUN mkdir -p /home/container/bin /home/container/nginx /home/container/php /home/container/public /run
+RUN mkdir -p /home/container/bin \
+             /home/container/nginx/conf.d \
+             /home/container/php \
+             /home/container/public \
+             /home/container/run \
+             /home/container/logs \
+             /home/container/tmp/nginx
 
 RUN cp $(which nginx) /home/container/bin/nginx && \
     cp $(which php-fpm82 || which php-fpm) /home/container/bin/php-fpm82
-
-RUN chmod -R 777 /run /var/lib/nginx /var/log
 
 RUN chown -R container:container /home/container
 
