@@ -1,28 +1,20 @@
 # TAGS: 8.3
 # VARIANT: apache
 # PLATFORMS: linux/amd64, linux/arm64/v8
-FROM php:8.3-apache
+FROM serversideup/docker-php:8.3-apache
 
 LABEL maintainer="Stegripe <support@stegripe.com>"
 
-# System packages
-RUN apt-get update && apt-get install -y \
-        curl git unzip zip \
-        libicu-dev libzip-dev libpng-dev libjpeg62-turbo-dev \
-        libfreetype6-dev libonig-dev libxml2-dev \
-    && rm -rf /var/lib/apt/lists/*
+# Fix AH00558 warning
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Apache config
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-    && a2enmod rewrite headers
+# Create Pterodactyl container user
+USER root
+RUN groupadd -r container && useradd -d /home/container -m -r -g container container
+USER container
 
-# PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-        pdo_mysql intl mbstring zip bcmath gd opcache pcntl
+ENV USER=container HOME=/home/container
+WORKDIR /home/container
 
-# Composer
-COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
-
-COPY entrypoint.sh /entrypoint.sh
+COPY ../entrypoint.sh /entrypoint.sh
 CMD ["/bin/bash", "/entrypoint.sh"]
