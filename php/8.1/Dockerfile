@@ -1,7 +1,7 @@
 # TAGS: 8.1
 # VARIANT: fpm-apache
 # PLATFORMS: linux/amd64, linux/arm64/v8
-FROM serversideup/docker-php:8.1-fpm-apache
+FROM serversideup/php:8.1-fpm-apache
 
 LABEL maintainer="Stegripe <support@stegripe.com>"
 
