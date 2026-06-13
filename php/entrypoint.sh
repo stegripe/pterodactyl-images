@@ -1,40 +1,24 @@
 #!/bin/bash
 # PHP Apache Pterodactyl Entrypoint
-# Default TZ
+
 TZ=${TZ:-UTC}
 export TZ
 
-# Calculate internal IP
-INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
-export INTERNAL_IP
-
-# Change to working directory
 cd /home/container
 
-# Print PHP and Composer versions
+# Print versions
 echo "PHP Version: $(php -v | head -n 1)"
 echo "Composer Version: $(composer --version 2>/dev/null || echo 'not available')"
 
-# Set Apache port
-APACHE_PORT="${APACHE_PORT:-${SERVER_PORT:-8080}}"
-export APACHE_PORT
+# Configure Apache to use Pterodactyl port
+APACHE_PORT="${SERVER_PORT:-8080}"
+sed -i "s/Listen 80/Listen ${APACHE_PORT}/g" /etc/apache2/ports.conf
+sed -i "s/:80>/:${APACHE_PORT}>/g" /etc/apache2/sites-available/*.conf /etc/apache2/sites-enabled/*.conf 2>/dev/null || true
+echo "Apache listening on port ${APACHE_PORT}"
 
-# Set Apache document root
-APACHE_DOCUMENT_ROOT="${APACHE_DOCUMENT_ROOT:-/home/container}"
-export APACHE_DOCUMENT_ROOT
-
-# Ensure Apache log directory exists
-mkdir -p /home/container/.apache/logs
-
-# Replace variables in startup command
+# Parse startup command (replace {{VAR}} with ${VAR})
 STARTUP_CMD="${STARTUP_CMD:-apache2-foreground}"
-if [ -f /etc/container/environment ]; then
-    source /etc/container/environment
-fi
-
-# Parse startup command
-PARSED=$(echo "${STARTUP_CMD}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
+PARSED=$(echo "${STARTUP_CMD}" | sed -e 's/{{/${/g' -e 's/}}/}/g' | sed -e 's/\/home\/container\/public/\/home\/container/g')
 echo "Starting: ${PARSED}"
 
-# Run startup command
 exec env ${PARSED}
