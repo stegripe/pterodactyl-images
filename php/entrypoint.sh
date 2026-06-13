@@ -20,7 +20,7 @@ APACHE_PORT="${APACHE_PORT:-${SERVER_PORT:-8080}}"
 export APACHE_PORT
 
 # Set Apache document root
-APACHE_DOCUMENT_ROOT="${APACHE_DOCUMENT_ROOT:-/home/container/public}"
+APACHE_DOCUMENT_ROOT="${APACHE_DOCUMENT_ROOT:-/home/container}"
 export APACHE_DOCUMENT_ROOT
 
 # Ensure Apache log directory exists
