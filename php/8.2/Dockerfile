@@ -12,7 +12,7 @@ WORKDIR /home/container
 
 USER root
 
-RUN apk add --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base python3 \
+RUN apk add --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base python3 bash \
     && ln -s /usr/bin/python3 /usr/local/bin/python
 
 RUN deluser www-data && \
