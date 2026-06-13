@@ -5,6 +5,7 @@ FROM serversideup/php:8.2-fpm-nginx-alpine
 
 LABEL maintainer="Stegripe <support@stegripe.com>"
 
+ENV DISABLE_DEFAULT_CONFIG=true
 ENV APP_BASE_DIR=/home/container
 ENV HOME=/home/container
 
