@@ -1,24 +1,28 @@
 #!/bin/bash
-# PHP FPM-Apache Pterodactyl Entrypoint
 
+# Default the TZ environment variable to UTC
 TZ=${TZ:-UTC}
 export TZ
 
-cd /home/container
+# Set environment variable that holds the Internal Docker IP
+INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
+export INTERNAL_IP
 
-# Print versions
-echo "PHP Version: $(php -v | head -n 1)"
-echo "Composer Version: $(composer --version 2>/dev/null || echo 'not available')"
+# Switch to the container's working directory
+cd /home/container || exit 1
 
-# Configure Apache to use Pterodactyl port
-APACHE_PORT="${SERVER_PORT:-8080}"
-sed -i "s/Listen 80/Listen ${APACHE_PORT}/g" /etc/apache2/ports.conf
-sed -i "s/:80>/:${APACHE_PORT}>/g" /etc/apache2/sites-available/*.conf /etc/apache2/sites-enabled/*.conf 2>/dev/null || true
-echo "Apache listening on port ${APACHE_PORT}"
+# Print Python version
+printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0mpython --version\n"
+python --version
 
-# Parse startup command (replace {{VAR}} with ${VAR})
-STARTUP_CMD="${STARTUP_CMD:-apache2-foreground}"
-PARSED=$(echo "${STARTUP_CMD}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
-echo "Starting: ${PARSED}"
+# Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
+# variable format of "${VARIABLE}" before evaluating the string and automatically
+# replacing the values.
+PARSED=$(echo -e $(echo -e ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g'))
 
-exec env ${PARSED}
+# Display the command we're running in the output, and then execute it with the env
+# from the container itself.
+printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m%s\n" "$PARSED"
+
+# shellcheck disable=SC2086
+eval ${PARSED}
