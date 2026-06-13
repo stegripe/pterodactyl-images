@@ -9,7 +9,6 @@ LABEL maintainer="Stegripe <support@stegripe.com>"
 USER root
 RUN groupadd -r container && useradd -d /home/container -m -r -g container container \
     && cp -rn /etc/apache2/conf-available/* /etc/apache2/conf-enabled/ 2>/dev/null || true
-USER container
 
 ENV USER=container HOME=/home/container
 WORKDIR /home/container
