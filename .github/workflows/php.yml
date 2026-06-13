@@ -1,0 +1,37 @@
+name: Build and Push PHP to OCI Image Registry
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "php/**/Dockerfile"
+      - "php/entrypoint.sh"
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - "php/**/Dockerfile"
+      - "php/entrypoint.sh"
+  workflow_dispatch:
+
+jobs:
+  php-apache:
+    name: PHP ${{ matrix.version }} Apache
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - "8.0"
+          - "8.1"
+          - "8.2"
+          - "8.3"
+          - "8.4"
+
+    uses: ./.github/workflows/build.yml
+    with:
+      rootdir: php
+      workdir: php/${{ matrix.version }}
+      image-name: php
+    secrets: inherit

@@ -16,7 +16,8 @@ const variant = getValue(lines.at(1));
 
 const version = getValue(lines.at(3)).split("-").at(0);
 const semverArray = version.split(".");
-const usesExplicitTags = originalTags.includes("uv");
+const isExplicitVersions = originalTags.length > 0 && originalTags.every(t => /^\d[\d.]*$/.test(t));
+const usesExplicitTags = originalTags.includes("uv") || isExplicitVersions;
 const versions = usesExplicitTags
     ? originalTags
     : [...semverArray.map((_, i) => semverArray.slice(0, semverArray.length - i).join(".")), ...originalTags];
