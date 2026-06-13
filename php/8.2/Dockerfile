@@ -18,8 +18,8 @@ RUN deluser www-data && \
 
 RUN mkdir -p /home/container/bin /home/container/nginx /home/container/php /home/container/public /run
 
-RUN cp /usr/sbin/nginx /home/container/bin/nginx && \
-    cp /usr/sbin/php-fpm82 /home/container/bin/php-fpm82
+RUN cp $(which nginx) /home/container/bin/nginx && \
+    cp $(which php-fpm82 || which php-fpm) /home/container/bin/php-fpm82
 
 RUN chmod -R 777 /run /var/lib/nginx /var/log
 
