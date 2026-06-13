@@ -12,6 +12,9 @@ WORKDIR /home/container
 
 USER root
 
+RUN apk add --no-cache tini ca-certificates curl ffmpeg git openssl sqlite tar tzdata build-base python3 \
+    && ln -s /usr/bin/python3 /usr/local/bin/python
+
 RUN deluser www-data && \
     addgroup -g 988 container && \
     adduser -D -u 988 -h /home/container -S -G container container
