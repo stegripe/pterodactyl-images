@@ -1,5 +1,5 @@
 #!/bin/bash
-# PHP Apache Pterodactyl Entrypoint
+# PHP FPM-Apache Pterodactyl Entrypoint
 
 TZ=${TZ:-UTC}
 export TZ
@@ -18,7 +18,7 @@ echo "Apache listening on port ${APACHE_PORT}"
 
 # Parse startup command (replace {{VAR}} with ${VAR})
 STARTUP_CMD="${STARTUP_CMD:-apache2-foreground}"
-PARSED=$(echo "${STARTUP_CMD}" | sed -e 's/{{/${/g' -e 's/}}/}/g' | sed -e 's/\/home\/container\/public/\/home\/container/g')
+PARSED=$(echo "${STARTUP_CMD}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo "Starting: ${PARSED}"
 
 exec env ${PARSED}
