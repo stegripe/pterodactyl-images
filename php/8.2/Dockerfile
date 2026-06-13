@@ -6,23 +6,20 @@ FROM php:8.2-apache
 LABEL maintainer="Stegripe <support@stegripe.com>"
 
 # Apache modules
-RUN a2enmod rewrite headers expires
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
+    && a2enmod rewrite headers expires
 
-# PHP extension installer (pre-compiled, much faster)
-COPY --from=mlocati/php-extension-installer:latest /usr/bin/install-php-extensions /usr/local/bin/
-
-# System dependencies
+# System dependencies + PHP extensions (parallel) + container user
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git curl unzip zip procps tini ca-certificates iproute2 \
-        sqlite3 default-mysql-client openssl \
+        libicu-dev libzip-dev libpng-dev libjpeg62-turbo-dev \
+        libfreetype6-dev libonig-dev libxml2-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        pdo_mysql intl mbstring zip bcmath gd opcache pcntl \
     && groupadd -r container && useradd -d /home/container -m -r -g container container \
     && rm -rf /var/lib/apt/lists/*
-
-# PHP extensions (installs pre-compiled binaries)
-RUN install-php-extensions \
-        pdo_mysql mysqli intl mbstring zip bcmath exif \
-        gd opcache pcntl sockets
 
 # PHP runtime defaults
 RUN { \
