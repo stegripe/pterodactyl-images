@@ -9,8 +9,7 @@ ENV APP_BASE_DIR=/home/container
 ENV HOME=/home/container
 
 RUN deluser www-data || true && \
-    addgroup -g 988 container && \
-    adduser -D -u 988 -h /home/container -S -G container container
+    adduser -D -h /home/container container
 
 USER container
 ENV USER=container HOME=/home/container
