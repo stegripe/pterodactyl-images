@@ -8,8 +8,11 @@ LABEL maintainer="Stegripe <support@stegripe.com>"
 ENV APP_BASE_DIR=/home/container
 ENV HOME=/home/container
 
-RUN deluser www-data || true && \
-    adduser -D -h /home/container container
+USER root
+
+RUN apk add --no-cache tini \
+    && deluser www-data \
+    && adduser -D -h /home/container container
 
 USER container
 ENV USER=container HOME=/home/container
