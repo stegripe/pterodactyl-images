@@ -4,6 +4,7 @@
 FROM alpine:3.22
 
 RUN apk add --no-cache \
+    git \
     nginx \
     php82 \
     php82-ctype \
@@ -29,6 +30,8 @@ RUN apk add --no-cache \
     php82-xml \
     php82-xmlreader \
     php82-xmlwriter
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN ln -sf /usr/bin/php8* /usr/bin/php && \
     ln -sf /usr/sbin/php-fpm8* /usr/sbin/php-fpm

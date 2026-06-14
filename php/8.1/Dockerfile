@@ -4,6 +4,7 @@
 FROM alpine:3.19
 
 RUN apk add --no-cache \
+    git \
     nginx \
     php81 \
     php81-ctype \
@@ -29,6 +30,8 @@ RUN apk add --no-cache \
     php81-xml \
     php81-xmlreader \
     php81-xmlwriter
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN ln -sf /usr/bin/php8* /usr/bin/php && \
     ln -sf /usr/sbin/php-fpm8* /usr/sbin/php-fpm
