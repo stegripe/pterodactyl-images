@@ -1,7 +1,7 @@
 # TAGS: 8.2
 # VARIANT: fpm-nginx
 # PLATFORMS: linux/amd64, linux/arm64/v8
-FROM alpine:3.22
+FROM alpine:3.24
 
 RUN apk add --no-cache \
     git \

@@ -1,7 +1,7 @@
 # TAGS: jod
 # VARIANT:
 # PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/ppc64le, linux/s390x
-FROM node:22.22.2-bullseye-slim
+FROM node:22.23.1-bullseye-slim
 
 ARG BUILDPLATFORM
 
