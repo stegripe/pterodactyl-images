@@ -1,7 +1,7 @@
 # TAGS: jod
 # VARIANT:
 # PLATFORMS: linux/amd64
-FROM node:22.22.2-bullseye-slim
+FROM node:22.23.1-bullseye-slim
 
 ARG BUILDPLATFORM
 
