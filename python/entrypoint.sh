@@ -11,14 +11,10 @@ export INTERNAL_IP
 # Switch to the container's working directory
 cd /home/container || exit 1
 
-# Print Python version
-printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0mpython --version\n"
-python --version
-
 # Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
 # variable format of "${VARIABLE}" before evaluating the string and automatically
 # replacing the values.
-PARSED=$(echo -e $(echo -e ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g'))
+PARSED=$(echo -e ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 
 # Display the command we're running in the output, and then execute it with the env
 # from the container itself.
