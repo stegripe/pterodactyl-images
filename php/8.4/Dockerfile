@@ -3,33 +3,13 @@
 # PLATFORMS: linux/amd64, linux/arm64/v8
 FROM alpine:latest
 
-RUN apk add --no-cache \
-    git \
-    nginx \
-    php84 \
-    php84-ctype \
-    php84-curl \
-    php84-fileinfo \
-    php84-fpm \
-    php84-ftp \
-    php84-gd \
-    php84-gettext \
-    php84-mbstring \
-    php84-opcache \
-    php84-openssl \
-    php84-pcntl \
-    php84-pdo \
-    php84-pdo_dblib \
-    php84-pdo_mysql \
-    php84-pdo_odbc \
-    php84-pdo_sqlite \
-    php84-pdo_pgsql \
-    php84-phar \
-    php84-session \
-    php84-tokenizer \
-    php84-xml \
-    php84-xmlreader \
-    php84-xmlwriter
+ARG PHP_VER=php84
+
+ENV EXT_LIST="bcmath bz2 calendar common ctype curl dom exif ffi fileinfo ftp gd gettext gmp iconv intl mbstring mysqli mysqlnd openssl pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite pgsql phar posix session shmop simplexml soap sockets sodium sqlite3 sysvmsg sysvsem sysvshm tokenizer xml xmlreader xmlwriter xsl zip"
+
+RUN PHP_EXT="" && \
+    for ext in $EXT_LIST; do PHP_EXT="$PHP_EXT ${PHP_VER}-$ext"; done && \
+    apk update && apk add --no-cache git nginx ${PHP_VER} ${PHP_VER}-fpm $PHP_EXT
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
