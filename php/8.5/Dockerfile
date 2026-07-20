@@ -1,22 +1,37 @@
 # TAGS: 8.5
 # VARIANT: fpm-nginx
 # PLATFORMS: linux/amd64, linux/arm64/v8
-FROM alpine:latest
+FROM node:24-bookworm-slim
 
-ARG PHP_VER=php85
+ENV DEBIAN_FRONTEND=noninteractive
 
-ENV EXT_LIST="bcmath bz2 calendar common ctype curl dom exif ffi fileinfo ftp gd gettext gmp iconv intl mbstring mysqli mysqlnd openssl pcntl pdo pdo_mysql pdo_pgsql pdo_sqlite pgsql phar posix session shmop simplexml soap sockets sodium sqlite3 sysvmsg sysvsem sysvshm tokenizer xml xmlreader xmlwriter xsl zip"
+ARG PHP_VER=8.5
 
-RUN PHP_EXT="" && \
-    for ext in $EXT_LIST; do PHP_EXT="$PHP_EXT ${PHP_VER}-$ext"; done && \
-    apk update && apk add --no-cache git nginx ${PHP_VER} ${PHP_VER}-fpm $PHP_EXT
+ENV EXT_LIST="bcmath bz2 curl gd gmp intl mbstring mysqli pdo-mysql pdo-pgsql pdo-sqlite pgsql soap sqlite3 xml xsl zip"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential ca-certificates curl dnsutils ffmpeg git \
+    iproute2 nginx openssl procps python3 sqlite3 tar tini tzdata \
+    && curl -sS https://packages.sury.org/php/README.txt | bash \
+    && PHP_PACKAGES="" \
+    && for ext in $EXT_LIST; do \
+        PHP_PACKAGES="$PHP_PACKAGES php${PHP_VER}-$(echo "$ext")"; \
+        done \
+    && npm i npm@latest -g \
+    && corepack enable \
+    && corepack prepare yarn@stable pnpm@latest \
+    && apt-get install -y --no-install-recommends php${PHP_VER}-cli php${PHP_VER}-fpm $PHP_PACKAGES \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && apt-get autoremove -y \
+    && apt-get autoclean -y \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN ln -sf /usr/bin/php8* /usr/bin/php && \
-    ln -sf /usr/sbin/php-fpm8* /usr/sbin/php-fpm
+RUN ln -sf /usr/bin/php${PHP_VER} /usr/bin/php && \
+    ln -sf /usr/sbin/php-fpm${PHP_VER} /usr/sbin/php-fpm
 
-RUN addgroup -S container && adduser -D -h /home/container -S -G container container
+RUN groupadd -r container && useradd -d /home/container -r -g container container
 
 ENV USER=container
 ENV HOME=/home/container
