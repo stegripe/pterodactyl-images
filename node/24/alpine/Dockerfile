@@ -1,6 +1,6 @@
 # TAGS: krypton, lts
 # VARIANT: alpine
-# PLATFORMS: linux/amd64, linux/arm64/v8, linux/arm/v7, linux/arm/v6, linux/ppc64le, linux/s390x
+# PLATFORMS: linux/amd64, linux/arm64/v8, linux/s390x
 FROM node:24.22.1-alpine
 
 ARG BUILDPLATFORM
